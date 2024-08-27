@@ -1,7 +1,7 @@
-package com.bezkoder.spring.jpa.postgresql.controller;
+package com.sosnazario.controller;
 
-import com.bezkoder.spring.jpa.postgresql.model.UserModel;
-import com.bezkoder.spring.jpa.postgresql.repository.UserRespository;
+import com.sosnazario.model.UserModel;
+import com.sosnazario.repository.UserRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

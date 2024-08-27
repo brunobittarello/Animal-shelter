@@ -23,10 +23,10 @@ services:
             - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
         volumes:
             - ./Temp/postgres-data:/var/lib/postgresql/data
-    app:
+    api:
         depends_on:
             - postgresdb
-        build: ./bezkoder-app
+        build: ./sosnazario-api
         restart: on-failure
         env_file: ./.env
         ports:
