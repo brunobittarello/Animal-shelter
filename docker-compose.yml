@@ -11,6 +11,19 @@ services:
     #     ports:
     #         - ${PORT}:80
 
+    pgadmin:
+        image: dpage/pgadmin4
+        environment:
+            PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+            PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+            PGADMIN_LISTEN_PORT: $PGADMIN_LISTEN_PORT
+        ports:
+            - 16543:$PGADMIN_LISTEN_PORT
+        depends_on:
+            - postgresdb
+        volumes:
+            - ./Temp/pgadmin:/var/lib/pgadmin
+
     postgresdb:
         image: postgres
         restart: unless-stopped
@@ -24,13 +37,13 @@ services:
         volumes:
             - ./Temp/postgres-data:/var/lib/postgresql/data
     api:
-        depends_on:
-            - postgresdb
         build: ./sosnazario-api
         restart: on-failure
         env_file: ./.env
         ports:
             - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+        depends_on:
+            - postgresdb
         environment:
             SPRING_APPLICATION_JSON: '{
                 "spring.datasource.url"  : "jdbc:postgresql://postgresdb:$POSTGRESDB_DOCKER_PORT/$POSTGRESDB_DATABASE",
