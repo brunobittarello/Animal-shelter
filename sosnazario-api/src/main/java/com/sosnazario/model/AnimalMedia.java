@@ -9,7 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class AnimalMediaModel {
+public class AnimalMedia {
 
     @Id
     @GeneratedValue

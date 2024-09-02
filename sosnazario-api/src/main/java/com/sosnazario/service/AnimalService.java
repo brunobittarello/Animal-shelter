@@ -23,11 +23,11 @@ public class AnimalService {
     @Autowired
     private EntityManager entityManager;
 
-    public Optional<AnimalModel> findById(Long id) {
+    public Optional<Animal> findById(Long id) {
         return animalRespository.findById(id);
     }
 
-    public AnimalModel create(AnimalModel animal) {
+    public Animal create(Animal animal) {
         return animalRespository.save(animal);
     }
 
@@ -35,12 +35,12 @@ public class AnimalService {
         animalRespository.deleteById(id);
     }
 
-    public AnimalModel addMedia(Long id, AnimalMediaModel media) {
-        Optional<AnimalModel> optAnimal = animalRespository.findById(id);
+    public Animal addMedia(Long id, AnimalMedia media) {
+        Optional<Animal> optAnimal = animalRespository.findById(id);
         if (optAnimal.isPresent() == false)
             return null;
 
-        AnimalModel animal = optAnimal.get();
+        Animal animal = optAnimal.get();
         animal.getMedialist().add(media);
         animal.setSize('m');
         animal.setLastModifiedDate();
@@ -48,11 +48,11 @@ public class AnimalService {
         return animalRespository.save(animal);
     }
 
-    public Iterable<AnimalModel> findAll(boolean isDeleted) {
+    public Iterable<Animal> findAll(boolean isDeleted) {
         Session session = entityManager.unwrap(Session.class);
         Filter filter = session.enableFilter("deletedAnimalFilter");
         filter.setParameter("isDeleted", isDeleted);
-        Iterable<AnimalModel> animals =  animalRespository.findAll();
+        Iterable<Animal> animals =  animalRespository.findAll();
         session.disableFilter("deletedAnimalFilter");
         return animals;
     }

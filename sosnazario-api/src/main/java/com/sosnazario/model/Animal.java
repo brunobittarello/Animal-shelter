@@ -16,7 +16,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 // @Where(clause = "deleted=false")
 @FilterDef(name = "deletedAnimalFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
 @Filter(name = "deletedAnimalFilter", condition = "deleted = :isDeleted")
-public class AnimalModel {
+public class Animal {
 
     @Id
     @GeneratedValue
@@ -37,7 +37,7 @@ public class AnimalModel {
     @Column(name = "last_modified_date")
     private Instant lastModifiedDate;
 
-    @OneToMany( targetEntity=AnimalMediaModel.class,cascade=CascadeType.ALL )
+    @OneToMany( targetEntity=AnimalMedia.class,cascade=CascadeType.ALL )
     private Set medialist;
 
     public Long getId() {

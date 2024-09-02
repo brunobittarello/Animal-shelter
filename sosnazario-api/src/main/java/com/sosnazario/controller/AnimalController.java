@@ -18,26 +18,26 @@ public class AnimalController {
     private AnimalService animalService;
 
     @GetMapping("/animal/all")
-    Iterable<AnimalModel> all() {
+    Iterable<Animal> all() {
         return animalService.findAll(false);
     }
 
     @GetMapping("/animal/{id}")
-    AnimalModel animalById(@PathVariable Long id) {
+    Animal animalById(@PathVariable Long id) {
         return animalService.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/animal")
-    AnimalModel save(@RequestBody AnimalModel animal) {
+    Animal save(@RequestBody Animal animal) {
         logger.info("An INFO Message");
         return animalService.create(animal);
     }
 
     @PostMapping("/animal/media/{id}")
-    AnimalModel save2(@PathVariable Long id) {
-        AnimalMediaModel animalMedia = new AnimalMediaModel();
+    Animal save2(@PathVariable Long id) {
+        AnimalMedia animalMedia = new AnimalMedia();
         animalMedia.setFile("foto.png");
-        AnimalModel animal = animalService.addMedia(id, animalMedia);
+        Animal animal = animalService.addMedia(id, animalMedia);
         if (animal == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
