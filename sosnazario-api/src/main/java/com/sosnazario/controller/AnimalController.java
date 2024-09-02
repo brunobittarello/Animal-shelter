@@ -11,6 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import jakarta.persistence.EntityManager;
+import org.hibernate.Filter;
+import org.hibernate.Session;
+
 @RestController
 @RequestMapping("/api")
 public class AnimalController {
@@ -19,17 +23,25 @@ public class AnimalController {
     private AnimalRespository animalRespository;
 
     @Autowired
+    private EntityManager entityManager;
+
+    @Autowired
     public AnimalController(AnimalRespository animalRespository) {
         this.animalRespository = animalRespository;
     }
 
     @GetMapping("/user/all")
     Iterable<AnimalModel> all() {
-        return animalRespository.findAll();
+        Session session = entityManager.unwrap(Session.class);
+        Filter filter = session.enableFilter("deletedAnimalFilter");
+        filter.setParameter("isDeleted", false);
+        Iterable<AnimalModel> animals =  animalRespository.findAll();
+        session.disableFilter("deletedAnimalFilter");
+        return animals;
     }
 
     @GetMapping("/user/{id}")
-    AnimalModel userById(@PathVariable Long id) {
+    AnimalModel animalById(@PathVariable Long id) {
         return animalRespository.findById(id).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND));
     }

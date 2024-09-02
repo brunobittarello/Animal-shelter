@@ -3,10 +3,19 @@ package com.sosnazario.model;
 import java.time.Instant;
 import java.util.Set;
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.FilterDef;
+import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.ParamDef;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
+@Table(name = "animal")
+@SQLDelete(sql = "UPDATE animal SET deleted = true WHERE id=?")
+// @Where(clause = "deleted=false")
+@FilterDef(name = "deletedAnimalFilter", parameters = @ParamDef(name = "isDeleted", type = Boolean.class))
+@Filter(name = "deletedAnimalFilter", condition = "deleted = :isDeleted")
 public class AnimalModel {
 
     @Id
@@ -17,7 +26,10 @@ public class AnimalModel {
     private char type;
     private char gender;
     private char size;
-    private boolean isHidden;
+    private boolean deleted = Boolean.FALSE;
+    @Column(length=512)
+    private String observation;
+
     @CreatedDate
     @Column(name = "created_date", updatable = false)
     private Instant createdDate = Instant.now();
@@ -76,12 +88,20 @@ public class AnimalModel {
         this.size = size;
     }
     
-    public boolean getIsHidden() {
-        return isHidden;
+    public boolean getDeleted() {
+        return deleted;
     }
 
-    public void setIsHidden(boolean isHidden) {
-        this.isHidden = isHidden;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public String getObservation() {
+        return observation;
+    }
+
+    public void setObservation(String observation) {
+        this.observation = observation;
     }
 
     public Set getMedialist() {

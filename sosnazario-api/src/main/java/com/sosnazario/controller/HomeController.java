@@ -17,12 +17,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello Spring Boot with Docker AAA111";
+        return "Hello Spring Boot with Docker AAA333";
     }
-
-	@RequestMapping("/bosta")
-    public String bosta() {
-        return "Hello Spring Boot with Docker BOSTAAA";
-    }
-
 }
