@@ -1,4 +1,4 @@
-FROM nginx:latest
+FROM nginx:alpine
 ENV TZ America/Sao_Paulo
 COPY Nginx/nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80 443

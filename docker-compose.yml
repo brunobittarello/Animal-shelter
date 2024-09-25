@@ -2,20 +2,24 @@
 version: "3.7"
 
 services:
-    # nginx:
-    #     build:
-    #         dockerfile: ./Nginx/Dockerfile
-    #         context: .
-    #     image: nginx
-    #     container_name: nginx
-    #     ports:
-    #         - ${PORT}:80
+    nginx:
+        build:
+            dockerfile: ./Nginx/Dockerfile
+            context: .
+        image: nginx
+        container_name: nginx
+        ports:
+            - 80:80
+        depends_on:
+            - ui
+            - api
+    
     ui:
         build: ./sosnazario-ui
         env_file: ./.env
         stop_signal: SIGINT
         ports:
-            - 8000:8000
+            - 8000:80
 
     # pgadmin:
     #     # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
