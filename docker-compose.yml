@@ -10,20 +10,26 @@ services:
     #     container_name: nginx
     #     ports:
     #         - ${PORT}:80
-
-    pgadmin:
-        # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
-        image: dpage/pgadmin4
-        environment:
-            PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
-            PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
-            PGADMIN_LISTEN_PORT: $PGADMIN_LISTEN_PORT
+    ui:
+        build: ./sosnazario-ui
+        env_file: ./.env
+        stop_signal: SIGINT
         ports:
-            - 16543:$PGADMIN_LISTEN_PORT
-        depends_on:
-            - postgresdb
-        volumes:
-            - ./Temp/pgadmin:/var/lib/pgadmin
+            - 8000:8000
+
+    # pgadmin:
+    #     # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
+    #     image: dpage/pgadmin4
+    #     environment:
+    #         PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+    #         PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+    #         PGADMIN_LISTEN_PORT: $PGADMIN_LISTEN_PORT
+    #     ports:
+    #         - 16543:$PGADMIN_LISTEN_PORT
+    #     depends_on:
+    #         - postgresdb
+    #     volumes:
+    #         - ./Temp/pgadmin:/var/lib/pgadmin
 
     postgresdb:
         image: postgres

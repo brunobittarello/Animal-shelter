@@ -34,10 +34,8 @@ public class AnimalController {
     }
 
     @PostMapping("/animal/media/{id}")
-    Animal save2(@PathVariable Long id) {
-        AnimalMedia animalMedia = new AnimalMedia();
-        animalMedia.setFile("foto.png");
-        Animal animal = animalService.addMedia(id, animalMedia);
+    Animal save2(@PathVariable Long id, @RequestBody AnimalMedia media) {
+        Animal animal = animalService.addMedia(id, media);
         if (animal == null)
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 

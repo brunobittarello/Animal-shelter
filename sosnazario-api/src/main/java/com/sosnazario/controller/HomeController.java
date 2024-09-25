@@ -17,6 +17,6 @@ public class HomeController {
 
     @RequestMapping("/")
     public String home() {
-        return "Hello Spring Boot with Docker AAA333";
+        return "Hello Spring Boot with Docker";
     }
 }
