@@ -7,6 +7,7 @@ services:
             dockerfile: ./Nginx/Dockerfile
             context: .
         image: nginx
+        restart: unless-stopped
         container_name: nginx
         ports:
             - 80:80
@@ -17,36 +18,11 @@ services:
     ui:
         build: ./sosnazario-ui
         env_file: ./.env
+        restart: unless-stopped
         stop_signal: SIGINT
         ports:
             - 8000:80
 
-    # pgadmin:
-    #     # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
-    #     image: dpage/pgadmin4
-    #     environment:
-    #         PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
-    #         PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
-    #         PGADMIN_LISTEN_PORT: $PGADMIN_LISTEN_PORT
-    #     ports:
-    #         - 16543:$PGADMIN_LISTEN_PORT
-    #     depends_on:
-    #         - postgresdb
-    #     volumes:
-    #         - ./Temp/pgadmin:/var/lib/pgadmin
-
-    postgresdb:
-        image: postgres
-        restart: unless-stopped
-        env_file: ./.env
-        environment:
-            - POSTGRES_USER=$POSTGRESDB_USER
-            - POSTGRES_PASSWORD=$POSTGRESDB_ROOT_PASSWORD
-            - POSTGRES_DB=$POSTGRESDB_DATABASE
-        ports:
-            - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
-        volumes:
-            - ./Temp/postgres-data:/var/lib/postgresql/data
     api:
         build: ./sosnazario-api
         restart: on-failure
@@ -67,3 +43,30 @@ services:
             - ./Temp/.m2:/root/.m2
         stdin_open: true
         tty: true
+
+    postgresdb:
+        image: postgres
+        restart: unless-stopped
+        env_file: ./.env
+        environment:
+            - POSTGRES_USER=$POSTGRESDB_USER
+            - POSTGRES_PASSWORD=$POSTGRESDB_ROOT_PASSWORD
+            - POSTGRES_DB=$POSTGRESDB_DATABASE
+        ports:
+            - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
+        volumes:
+            - ./Temp/postgres-data:/var/lib/postgresql/data
+
+    # pgadmin:
+    #     # https://www.pgadmin.org/docs/pgadmin4/latest/container_deployment.html
+    #     image: dpage/pgadmin4
+    #     environment:
+    #         PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+    #         PGADMIN_DEFAULT_PASSWORD: $PGADMIN_DEFAULT_PASSWORD
+    #         PGADMIN_LISTEN_PORT: $PGADMIN_LISTEN_PORT
+    #     ports:
+    #         - 16543:$PGADMIN_LISTEN_PORT
+    #     depends_on:
+    #         - postgresdb
+    #     volumes:
+    #         - ./Temp/pgadmin:/var/lib/pgadmin

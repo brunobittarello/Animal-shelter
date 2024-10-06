@@ -1,0 +1,11 @@
+body {
+    --bgColor-default: #0d1117;
+    --fgColor-default: #f0f6fc;
+    --body-font-size: 0.875rem;
+
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+    font-size: var(--body-font-size, 14px);
+    line-height: 1.5;
+    color: var(--fgColor-default, var(--color-fg-default));
+    background-color: var(--bgColor-default, var(--color-canvas-default));
+  }
