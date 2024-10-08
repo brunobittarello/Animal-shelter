@@ -9,3 +9,13 @@ body {
     color: var(--fgColor-default, var(--color-fg-default));
     background-color: var(--bgColor-default, var(--color-canvas-default));
   }
+
+  .center-cropped {
+    object-fit: cover; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+    aspect-ratio: 1;
+    width: 100%;
+  }
+
+  .animal-panel {
+  }

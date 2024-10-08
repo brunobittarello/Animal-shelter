@@ -2,9 +2,10 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 
-class SearchFields:
-	def __init__(self, fields):
+class SearchPage:
+	def __init__(self, fields, animals):
 		self.fields = fields
+		self.animals = animals
 
 class Selection:
 	def __init__(self, id, name, options=list()):
@@ -15,6 +16,10 @@ class Selection:
 class Option:
 	def __init__(self, value, name):
 		self.value = value
+		self.name = name
+
+class Animal:
+	def __init__(self, name):
 		self.name = name
 
 @app.route('/')
@@ -33,7 +38,9 @@ def search():
 
 	size = Selection("size", "Porte", [Option(1,"P"),Option(2,"M"),Option(3,"G")])
 
-	page = SearchFields([ages, types, genres, size])
+	animals = [Animal("Baiao Velho"),Animal("Cabeca"),Animal("Cris"),Animal("Esquina"),Animal("Ivani"),Animal("Rex"),Animal("Velha Gorda")]
+
+	page = SearchPage([ages, types, genres, size], animals)
 	return render_template("search.html", page=page)
 
 if __name__ == '__main__':
