@@ -1,4 +1,7 @@
 from flask import Flask, render_template
+import urllib.request, json, logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
@@ -38,7 +41,10 @@ def search():
 
 	size = Selection("size", "Porte", [Option(1,"P"),Option(2,"M"),Option(3,"G")])
 
-	animals = [Animal("Baiao Velho"),Animal("Cabeca"),Animal("Cris"),Animal("Esquina"),Animal("Ivani"),Animal("Rex"),Animal("Velha Gorda")]
+	animals = []
+	with urllib.request.urlopen("http://api:8080/api/animal/all") as url:
+		animals = json.load(url)
+		app.logger.info(animals)
 
 	page = SearchPage([ages, types, genres, size], animals)
 	return render_template("search.html", page=page)
