@@ -3,6 +3,7 @@ package com.sosnazario.controller;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.sosnazario.dto.AnimalSearchDto;
 import com.sosnazario.model.*;
 import com.sosnazario.repository.AnimalRespository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,17 @@ public class AnimalService {
         animal.setLastModifiedDate();
         logger.info("An INFO Message " + animal.getName() + " " + media.getFile());
         return animalRespository.save(animal);
+    }
+
+    public Iterable<Animal> findByExample(AnimalSearchDto animalExample) {
+        Session session = entityManager.unwrap(Session.class);
+        Filter filter = session.enableFilter("deletedAnimalFilter");
+        filter.setParameter("isDeleted", false);
+
+        Iterable<Animal> animals =  animalRespository.findByAgeAndTypeAndGenderAndSize(animalExample.getAgeOfBirth(), animalExample.getType(), animalExample.getGender(), animalExample.getSize());
+
+        session.disableFilter("deletedAnimalFilter");
+        return animals;
     }
 
     public Iterable<Animal> findAll(boolean isDeleted) {
