@@ -1,45 +1,34 @@
 from flask import Flask, render_template
+from data import *
 import urllib.request, json, logging
+import glob
 
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
 
-class SearchPage:
-	def __init__(self, fields, animals):
-		self.fields = fields
-		self.animals = animals
-
-class Selection:
-	def __init__(self, id, name, options=list()):
-		self.id = id
-		self.name = name
-		self.options = options
-
-class Option:
-	def __init__(self, value, name):
-		self.value = value
-		self.name = name
-
-class Animal:
-	def __init__(self, name):
-		self.name = name
+def getLabels():
+	language = "pt"
+	return  languages[language]
 
 @app.route('/')
 def index():
-	return render_template("index.html")
+	labels = getLabels()
+	return render_template("index.html", labels=labels)
 
 # https://imasters.com.br/desenvolvimento/conhecendo-o-jinja2-um-mecanismo-para-templates-no-flask
 @app.route('/search')
 @app.route('/buscar')
 def search():
-	ages = Selection("age", "Ano", [Option(2020,2020),Option(2021,2021),Option(2022,2022)])
+	labels = getLabels()
 
-	types = Selection("type", "Tipo", [Option(1,"Cães"),Option(2,"Gatos")])
+	ages = Selection("age", labels.age_of_birth, [Option(2020,2020),Option(2021,2021),Option(2022,2022)])
 
-	genres = Selection("genre", "Gênero", [Option(1,"Femea"),Option(2,"Macho")])
+	types = Selection("type", labels.type, [Option(1,labels.dogs),Option(2,labels.cats)])
 
-	size = Selection("size", "Porte", [Option(1,"P"),Option(2,"M"),Option(3,"G")])
+	genres = Selection("genre", labels.genre, [Option(1,labels.female),Option(2,labels.male)])
+
+	size = Selection("size", labels.size, [Option(1,labels.small),Option(2,labels.medium),Option(3,labels.large)])
 
 	animals = []
 	with urllib.request.urlopen("http://api:8080/api/animal/all") as url:
@@ -47,7 +36,16 @@ def search():
 		app.logger.info(animals)
 
 	page = SearchPage([ages, types, genres, size], animals)
-	return render_template("search.html", page=page)
+	return render_template("search.html", labels=labels, page=page)
 
 if __name__ == '__main__':
+	languages = {}
+	language_list = glob.glob("languages/*.json")
+	for lang in language_list:
+		filename = lang.split('/')
+		lang_code = filename[1].split('.')[0]
+
+		with open(lang, 'r', encoding='utf8') as file:
+			languages[lang_code] = json.loads(file.read(), object_hook=Struct)
+
 	app.run(host='0.0.0.0', port=80)

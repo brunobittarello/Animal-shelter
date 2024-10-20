@@ -7,48 +7,8 @@
 {% block content %}
 <section class="jumbotron text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">Flask Docker App with Bootstrap Templates</h1>
-    <p class="lead text-muted">
-      Flask Application with Docker configuration.
-      The App uses Bootstrap templates and static files.
-    </p>
+    <h3 class="jumbotron-heading">{{ labels.about_description }}</h3>
   </div>
 </section>
 
-<div class="py-5">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
-          <img class="card-img-top img-thumbnail" src="{{ url_for('static', filename='images/docker.png') }}" alt="Docker Logo" />
-          <div class="card-body">
-            <p class="card-text">
-              Docker is a set of platform as a service products that uses OS-level virtualization to deliver software in packages called containers. Containers
-              are isolated from one another and bundle their own software, libraries and configuration files; they can communicate with each other through
-              well-defined channels.
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- ./col-md-4 -->
-
-      <div class="col-md-4">
-        <div class="card mb-4 box-shadow">
-          <img class="card-img-top img-thumbnail" src="{{ url_for('static', filename='images/bootstrap.png') }}" alt="Bootstrap Logo" />
-          <div class="card-body">
-            <p class="card-text">
-              Bootstrap is a free and open-source CSS framework directed at
-              responsive, mobile-first front-end web development.
-              It contains CSS- and JavaScript-based design templates
-              for typography, forms, buttons, navigation, and other interface components.
-            </p>
-          </div>
-        </div>
-      </div>
-      <!-- ./col-md-4 -->
-
-    </div>
-    <!-- ./row -->
-  </div>
-</div>
 {% endblock %}

@@ -1,0 +1,18 @@
+{
+    "home": "Home",
+    "search": "Search",
+    "search_title": "Animals for donation",
+    "about_description": "This is an animal shelter since 2024 and we have 55 animals available for donation",
+    "age_of_birth": "Age of birth",
+    "type": "Type",
+    "dogs": "Dogs",
+    "cats": "Cats",
+    "genre": "Genre",
+    "female": "Female",
+    "male": "Male",
+    "size": "Size",
+    "large": "L",
+    "medium": "M",
+    "small": "S",
+    "clear": "Clear"
+}

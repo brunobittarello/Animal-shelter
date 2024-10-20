@@ -7,7 +7,7 @@
 {% block content %}
 <section class="jumbotron text-center">
   <div class="container">
-    <h1 class="jumbotron-heading">Nazarenos</h1>
+    <h1 class="jumbotron-heading">{{ labels.search_title }}</h1>
   </div>
 </section>
 
@@ -23,7 +23,7 @@
             {% endfor %}
           </select>
         {% endfor %}
-        <button type="button" class="btn btn-primary">Limpar</button>
+        <button type="button" class="btn btn-primary">{{ labels.clear }}</button>
       </div>
     </div>
     
