@@ -35,16 +35,16 @@ public class AnimalController {
         logger.info("Parameters are " + allParams.entrySet());
 
         AnimalSearchDto animal = new AnimalSearchDto();
-        if (allParams.containsKey("age")) {
+        if (allParams.containsKey("age") && allParams.get("age") != "") {
             animal.setAgeOfBirth(Integer.valueOf(allParams.get("age")));
         }
-        if (allParams.containsKey("type")) {
+        if (allParams.containsKey("type") && allParams.get("type") != "") {
             animal.setType(allParams.get("type").charAt(0));
         }
-        if (allParams.containsKey("gender")) {
+        if (allParams.containsKey("gender") && allParams.get("gender") != "") {
             animal.setGender(allParams.get("gender").charAt(0));
         }
-        if (allParams.containsKey("size")) {
+        if (allParams.containsKey("size") && allParams.get("size") != "") {
             animal.setSize(allParams.get("size").charAt(0));
         }
         

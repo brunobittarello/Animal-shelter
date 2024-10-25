@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<section class="jumbotron text-center">
+<section class="jumbotron text-center mb-3">
   <div class="container">
     <h1 class="jumbotron-heading">{{ labels.search_title }}</h1>
   </div>
@@ -13,25 +13,39 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12 col-lg-3">
-      <div id="" class="vstack gap-2">
+    <div class="col-md-12 col-lg-3 mb-3">
+      <div id="search-form" class="vstack gap-2">
         {% for field in page.fields %}
-          <select id="{{ field.id }}" class="form-select" aria-label="Default select example">
-            <option selected>{{ field.name }}</option>
-            {% for option in field.options %}
-              <option value="{{ option.value }}">{{ option.name }}</option>
-            {% endfor %}
-          </select>
+        <select id="{{ field.id }}" name="{{ field.id }}" class="form-select" aria-label="Default select example" onchange="search()">
+          <option value="" selected>{{ field.name }}</option>
+          {% for option in field.options %}
+          <option value="{{ option.value }}">{{ option.name }}</option>
+          {% endfor %}
+        </select>
         {% endfor %}
         <button type="button" class="btn btn-primary">{{ labels.clear }}</button>
       </div>
     </div>
-    
-    <div class="col col-lg-9 row">
+
+    <div id="animals-grid" class="col col-lg-9 row">
       {% set animals = page.animals %}
       {% include 'components/animalList.html' %}
     </div>
     <!-- ./row -->
   </div>
 </div>
+{% endblock %}
+
+{% block page_scripts %}
+<script>
+  function search() {
+    var serial = $("#search-form").children().serialize();
+    $.get("/query?"+serial, onAnimalQuery);
+  }
+
+  function onAnimalQuery(data)
+  {
+    $("#animals-grid").html(data);
+  }
+</script>
 {% endblock %}

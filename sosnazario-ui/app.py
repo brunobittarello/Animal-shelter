@@ -1,11 +1,13 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from data import *
-import urllib.request, json, logging
+import urllib.request, urllib.parse, json, logging
 import glob
 
 logging.basicConfig(level=logging.DEBUG)
 
 app = Flask(__name__)
+
+API_URL = "http://api:8080/api"
 
 def getLabels():
 	language = "pt"
@@ -24,19 +26,38 @@ def search():
 
 	ages = Selection("age", labels.age_of_birth, [Option(2020,2020),Option(2021,2021),Option(2022,2022)])
 
-	types = Selection("type", labels.type, [Option(1,labels.dogs),Option(2,labels.cats)])
+	types = Selection("type", labels.type, [Option("D",labels.dogs),Option("C",labels.cats)])
 
-	genres = Selection("genre", labels.genre, [Option(1,labels.female),Option(2,labels.male)])
+	gender = Selection("gender", labels.gender, [Option("F",labels.female),Option("M",labels.male)])
 
-	size = Selection("size", labels.size, [Option(1,labels.small),Option(2,labels.medium),Option(3,labels.large)])
+	size = Selection("size", labels.size, [Option("S",labels.small),Option("M",labels.medium),Option("L",labels.large)])
 
 	animals = []
-	with urllib.request.urlopen("http://api:8080/api/animal/all") as url:
+	with urllib.request.urlopen(API_URL + "/animal/all") as url:
 		animals = json.load(url)
 		app.logger.info(animals)
 
-	page = SearchPage([ages, types, genres, size], animals)
+	page = SearchPage([ages, types, gender, size], animals)
 	return render_template("search.html", labels=labels, page=page)
+
+@app.route('/query')
+def query():
+	args = request.args
+	app.logger.info(args)
+	app.logger.info(API_URL)
+	# https://docs.python.org/3/howto/urllib2.html
+	url_values = urllib.parse.urlencode(args)
+	animals = []
+	with urllib.request.urlopen(API_URL + "/animal/query?" + url_values) as url:
+		animals = json.load(url)
+		app.logger.info(animals)
+
+	if not animals:
+		app.logger.info("animalNotFound")
+		labels = getLabels()
+		return render_template("components/animalNotFound.html", labels=labels)
+	return render_template("components/animalList.html", animals=animals)
+
 
 if __name__ == '__main__':
 	languages = {}

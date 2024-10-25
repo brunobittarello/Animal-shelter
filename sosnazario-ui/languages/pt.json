@@ -7,12 +7,13 @@
     "type": "Tipo",
     "dogs": "Cães",
     "cats": "Gatos",
-    "genre": "Gênero",
+    "gender": "Gênero",
     "female": "Fêmea",
     "male": "Macho",
     "size": "Porte",
     "large": "G",
     "medium": "M",
     "small": "P",
-    "clear": "Limpar"
+    "clear": "Limpar",
+    "animals_not_found": "Nenhum animal encontrado"
 }
