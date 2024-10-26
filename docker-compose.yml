@@ -10,7 +10,7 @@ services:
         restart: unless-stopped
         container_name: nginx
         ports:
-            - 80:80
+            - $MAIN_PORT:80
         depends_on:
             - ui
             - api
@@ -20,15 +20,15 @@ services:
         env_file: ./.env
         restart: unless-stopped
         stop_signal: SIGINT
-        ports:
-            - 8000:80
+        # ports:
+        #     - "80"
 
     api:
         build: ./sosnazario-api
         restart: on-failure
         env_file: ./.env
-        ports:
-            - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+        # ports:
+        #     - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
         depends_on:
             - postgresdb
         environment:
@@ -54,8 +54,8 @@ services:
             - POSTGRES_USER=$POSTGRESDB_USER
             - POSTGRES_PASSWORD=$POSTGRESDB_ROOT_PASSWORD
             - POSTGRES_DB=$POSTGRESDB_DATABASE
-        ports:
-            - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
+        # ports:
+        #     - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
         volumes:
             - ./Temp/postgres-data:/var/lib/postgresql/data
 
