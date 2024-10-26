@@ -1,11 +1,11 @@
-package com.sosnazario.controller;
+package com.animalshelter.controller;
 
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.sosnazario.dto.AnimalSearchDto;
-import com.sosnazario.model.*;
-import com.sosnazario.repository.AnimalRespository;
+import com.animalshelter.dto.AnimalSearchDto;
+import com.animalshelter.model.*;
+import com.animalshelter.repository.AnimalRespository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.sosnazario.controller;
+package com.animalshelter.controller;
 
 import java.util.ArrayList;
 import java.util.List;

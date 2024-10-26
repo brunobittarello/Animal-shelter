@@ -16,7 +16,7 @@ services:
             - api
     
     ui:
-        build: ./sosnazario-ui
+        build: ./animal-shelter-ui
         env_file: ./.env
         restart: unless-stopped
         stop_signal: SIGINT
@@ -24,7 +24,7 @@ services:
         #     - "80"
 
     api:
-        build: ./sosnazario-api
+        build: ./animal-shelter-api
         restart: on-failure
         env_file: ./.env
         # ports:

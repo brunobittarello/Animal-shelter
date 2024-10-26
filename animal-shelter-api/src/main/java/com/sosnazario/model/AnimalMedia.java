@@ -1,4 +1,4 @@
-package com.sosnazario.model;
+package com.animalshelter.model;
 
 //https://github.com/search?q=repo%3Aeugenp%2Ftutorials+%40CreatedDate&type=code
 

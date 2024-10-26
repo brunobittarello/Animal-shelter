@@ -1,6 +1,6 @@
-package com.sosnazario.repository;
+package com.animalshelter.repository;
 
-import com.sosnazario.model.Animal;
+import com.animalshelter.model.Animal;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.JpaRepository;

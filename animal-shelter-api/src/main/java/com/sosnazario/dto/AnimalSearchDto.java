@@ -1,4 +1,4 @@
-package com.sosnazario.dto;
+package com.animalshelter.dto;
 
 import lombok.Data;
 

@@ -1,4 +1,4 @@
-package com.sosnazario.model;
+package com.animalshelter.model;
 
 import java.time.Instant;
 import java.util.Set;
