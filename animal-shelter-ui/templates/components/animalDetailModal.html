@@ -1,0 +1,31 @@
+<div id="animal-detail-modal" class="modal animal-details-modal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img class="animal-image center-cropped" src="" alt="...">
+                        </div>
+                        <div class="col-md-4 d-flex flex-column">
+                            <div class="vstack">
+                                <h3 class="animal-name fw-bold text-center"></h3>
+                                <h5 class="fw-bold mt-3">{{ labels.gender }}</h5>
+                                <h5 class="animal-gender"></h5>
+                                <h5 class="fw-bold mt-3">{{ labels.type }}</h5>
+                                <h5 class="animal-type"></h5>
+                                <h5 class="fw-bold mt-3">{{ labels.age_of_birth }}</h5>
+                                <h5 class="animal-age"></h5>
+                                <h5 class="fw-bold mt-3">{{ labels.size }}</h5>
+                                <h5 class="animal-size"></h5>
+                                <h5 class="fw-bold mt-3">Descrição</h5>
+                                <h5 class="animal-description"></h5>
+                            </div>
+                            <button type="button" class="btn btn-primary align-self-end me-auto" onclick="onAdopt()">Quero adotar!</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

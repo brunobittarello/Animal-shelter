@@ -17,5 +17,6 @@ body {
     width: 100%;
   }
 
-  .animal-panel {
+  .animal-details-modal {
+    --bs-modal-bg: #1d2234;
   }

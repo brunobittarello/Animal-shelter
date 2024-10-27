@@ -23,7 +23,7 @@
           {% endfor %}
         </select>
         {% endfor %}
-        <button type="button" class="btn btn-primary">{{ labels.clear }}</button>
+        <button type="button" class="btn btn-primary" onclick="onClear();search();">{{ labels.clear }}</button>
       </div>
     </div>
 
@@ -33,11 +33,18 @@
     </div>
     <!-- ./row -->
   </div>
+  {% include 'components/animalDetailModal.html' %}
 </div>
 {% endblock %}
 
 {% block page_scripts %}
 <script>
+  const animalModal = new bootstrap.Modal(document.getElementById("animal-detail-modal"), {});
+
+  function onClear() {
+    $("#search-form select").val("");
+  }
+
   function search() {
     var serial = $("#search-form").children().serialize();
     $.get("/query?"+serial, onAnimalQuery);
@@ -46,6 +53,23 @@
   function onAnimalQuery(data)
   {
     $("#animals-grid").html(data);
+  }
+
+  function onAnimalClick(id)
+  {
+    $.get("/api/animal/"+id, onAnimalDetail);
+  }
+  
+  function onAnimalDetail(data)
+  {
+    console.log(data);
+    $(".animal-image").attr("src", "/static/images/animals/" + data.name + "/1.jpeg");
+    $(".animal-name").text(data.name);
+    $(".animal-gender").text(data.gender);
+    $(".animal-type").text(data.type);
+    $(".animal-age").text(new Date().getFullYear() - data.ageOfBirth);
+    $(".animal-size").text(data.size);
+    animalModal.show();
   }
 </script>
 {% endblock %}
