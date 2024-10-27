@@ -58,6 +58,18 @@ def query():
 		return render_template("components/animalNotFound.html", labels=labels)
 	return render_template("components/animalList.html", animals=animals)
 
+@app.route('/animal/<animal_id>')
+def animalById(animal_id):
+	with urllib.request.urlopen(API_URL + "/animal/" + animal_id) as url:
+		animal = json.load(url, object_hook=Struct)
+		app.logger.info(animal)
+		labels = getLabels()
+		animal.gender = labels.male if animal.gender == "M" else labels.female
+		animal.type = labels.cats if animal.type == "C" else labels.dogs
+		animal.size = labels.small if animal.size == "S" else labels.medium if animal.size == "M" else labels.large
+		return animal.__dict__
+	return ""
+
 
 if __name__ == '__main__':
 	languages = {}
