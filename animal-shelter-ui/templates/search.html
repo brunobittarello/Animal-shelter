@@ -69,6 +69,7 @@
     $(".animal-type").text(data.type);
     $(".animal-age").text(new Date().getFullYear() - data.yearOfBirth);
     $(".animal-size").text(data.size);
+    $(".animal-description").text(data.observation);
     $(".animal-adopt-link").attr("href", $(".animal-adopt-link").data("base-href") + data.name);
     animalModal.show();
   }

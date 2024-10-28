@@ -18,10 +18,13 @@
                                 <h5 class="animal-age"></h5>
                                 <h5 class="fw-bold mt-3">{{ labels.size }}</h5>
                                 <h5 class="animal-size"></h5>
-                                <h5 class="fw-bold mt-3">Descrição</h5>
+                                <h5 class="fw-bold mt-3">{{ labels.description }}</h5>
                                 <h5 class="animal-description"></h5>
                             </div>
-                            <button type="button" class="btn btn-primary align-self-end me-auto" onclick="onAdopt()">Quero adotar!</button>
+                            <a class="animal-adopt-link btn btn-primary" href="" role="button" target=”_blank”
+                                data-base-href="https://wa.me/{{ labels.whatsapp_number }}?text={{ labels.whatsapp_message }}">
+                                {{ labels.adopt_button }}
+                            </a>
                         </div>
                     </div>
                 </div>
