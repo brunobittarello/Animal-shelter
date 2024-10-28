@@ -22,7 +22,7 @@ public class Animal {
     @GeneratedValue
     private Long id;
     private String name;
-    private int ageOfBirth;
+    private int yearOfBirth;
     private char type;
     private char gender;
     private char size;
@@ -56,12 +56,12 @@ public class Animal {
         this.name = name;
     }
 
-    public int getAgeOfBirth() {
-        return ageOfBirth;
+    public int getYearOfBirth() {
+        return yearOfBirth;
     }
 
-    public void setAgeOfBirth(int ageOfBirth) {
-        this.ageOfBirth = ageOfBirth;
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
     
     public char getType() {

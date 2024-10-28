@@ -1,7 +1,12 @@
-INSERT INTO public.animal VALUES (1, 2020, '2024-09-02 21:59:14.020328+00', false, 'M', NULL, 'Baiao Velho', NULL, 'S', 'D') ON CONFLICT DO NOTHING;
-INSERT INTO public.animal VALUES (2, 2021, '2024-09-02 22:16:34.035869+00', false, 'M', NULL, 'Cabeca', NULL, 'S', 'D') ON CONFLICT DO NOTHING;
-INSERT INTO public.animal VALUES (3, 2022, '2024-09-02 23:01:38.168093+00', false, 'M', NULL, 'Cris', NULL, 'M', 'D') ON CONFLICT DO NOTHING;
-INSERT INTO public.animal VALUES (4, 2020, '2024-09-02 23:07:47.041651+00', false, 'M', NULL, 'Esquina', NULL, 'M', 'D') ON CONFLICT DO NOTHING;
-INSERT INTO public.animal VALUES (5, 2021, '2024-09-02 23:07:47.041651+00', false, 'F', NULL, 'Ivani', NULL, 'L', 'D') ON CONFLICT DO NOTHING;
-INSERT INTO public.animal VALUES (6, 2022, '2024-09-02 23:07:47.041651+00', false, 'M', NULL, 'Rex', NULL, 'L', 'D') ON CONFLICT DO NOTHING;
-INSERT INTO public.animal VALUES (7, 2020, '2024-09-02 23:07:47.041651+00', false, 'F', NULL, 'Velha Gorda', NULL, 'L', 'C') ON CONFLICT DO NOTHING;
+INSERT INTO public.animal(id, created_date, last_modified_date, deleted, year_of_birth, type, gender, size, name, observation) VALUES
+
+ (1, NOW(), NULL, false, 2020, 'D', 'M', 'S', 'Baiao Velho', NULL),
+ (2, NOW(), NULL, false, 2021, 'D', 'M', 'S', 'Cabeca', NULL),
+ (3, NOW(), NULL, false, 2022, 'D', 'M', 'M', 'Cris', NULL),
+ (4, NOW(), NULL, false, 2020, 'D', 'M', 'M', 'Esquina', NULL),
+ (5, NOW(), NULL, false, 2021, 'D', 'F', 'L', 'Ivani', NULL),
+ (6, NOW(), NULL, false, 2022, 'D', 'M', 'L', 'Rex', NULL),
+ (7, NOW(), NULL, false, 2020, 'C', 'F', 'L', 'Velha Gorda', NULL)
+ 
+ ON CONFLICT DO NOTHING
+ ;

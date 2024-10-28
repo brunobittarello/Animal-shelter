@@ -3,7 +3,9 @@
     "search": "Search",
     "search_title": "Animals for donation",
     "about_description": "This is an animal shelter since 2024 and we have 55 animals available for donation",
-    "age_of_birth": "Age of birth",
+    "age": "Age",
+    "yearOld": "year old",
+    "yearsOld": "years old",
     "type": "Type",
     "dogs": "Dogs",
     "cats": "Cats",
@@ -11,9 +13,13 @@
     "female": "Female",
     "male": "Male",
     "size": "Size",
-    "large": "L",
-    "medium": "M",
-    "small": "S",
+    "large": "Large",
+    "medium": "Medium",
+    "small": "Small",
     "clear": "Clear",
-    "animals_not_found": "No animal found"
+    "description": "Description",
+    "animals_not_found": "No animal found",
+    "adopt_button": "I want to adopt!",
+    "whatsapp_number": "555",
+    "whatsapp_message": "Hi%2C%20I%20would%20like%20to%20adopt%20"
 }

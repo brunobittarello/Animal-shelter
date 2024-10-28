@@ -36,7 +36,7 @@ public class AnimalController {
 
         AnimalSearchDto animal = new AnimalSearchDto();
         if (allParams.containsKey("age") && allParams.get("age") != "") {
-            animal.setAgeOfBirth(Integer.valueOf(allParams.get("age")));
+            animal.setYearOfBirth(Integer.valueOf(allParams.get("age")));
         }
         if (allParams.containsKey("type") && allParams.get("type") != "") {
             animal.setType(allParams.get("type").charAt(0));

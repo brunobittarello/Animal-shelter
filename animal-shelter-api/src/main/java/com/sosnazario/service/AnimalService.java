@@ -54,7 +54,7 @@ public class AnimalService {
         Filter filter = session.enableFilter("deletedAnimalFilter");
         filter.setParameter("isDeleted", false);
 
-        Iterable<Animal> animals =  animalRespository.findByAgeAndTypeAndGenderAndSize(animalExample.getAgeOfBirth(), animalExample.getType(), animalExample.getGender(), animalExample.getSize());
+        Iterable<Animal> animals =  animalRespository.findByAgeAndTypeAndGenderAndSize(animalExample.getYearOfBirth(), animalExample.getType(), animalExample.getGender(), animalExample.getSize());
 
         session.disableFilter("deletedAnimalFilter");
         return animals;

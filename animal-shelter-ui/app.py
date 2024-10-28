@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from data import *
 import urllib.request, urllib.parse, json, logging
 import glob
+from datetime import datetime
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -24,7 +25,11 @@ def index():
 def search():
 	labels = getLabels()
 
-	ages = Selection("age", labels.age_of_birth, [Option(2020,2020),Option(2021,2021),Option(2022,2022)])
+	current_year = datetime.now().year
+	ageOptions = []
+	for x in range(12):
+		ageOptions.append(Option(current_year - x, str(x) + " " + (labels.yearOld if x < 2 else labels.yearsOld)))
+	ages = Selection("age", labels.age, ageOptions)
 
 	types = Selection("type", labels.type, [Option("D",labels.dogs),Option("C",labels.cats)])
 
